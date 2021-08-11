@@ -20,7 +20,7 @@ stages:
         npm run release
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: 'release'
+        targetPath: './release'
         artifact: 'artifacts'
         publishLocation: 'pipeline'
 
