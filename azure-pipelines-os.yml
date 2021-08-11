@@ -17,6 +17,7 @@ stages:
         versionSpec: "12.x"
     - script: |
         npm install
+    - script: |
         npm run release
     - task: PublishPipelineArtifact@1
       inputs:
