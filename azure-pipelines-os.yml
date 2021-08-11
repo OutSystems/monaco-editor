@@ -8,7 +8,7 @@ stages:
   - job: Build
     displayName: 'Build Job'
     steps:
-      - task: npmAuthenticate@0
+    - task: npmAuthenticate@0
       inputs:
         workingFile: '.npmrc'
         customEndpoint: 'NPM Authentication Token'
