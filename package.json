@@ -1,5 +1,5 @@
 {
-  "name": "@outsystems/monaco-editor",
+  "name": "monaco-editor",
   "private": true,
   "version": "0.21.3-os3",
   "description": "A browser based code editor",
