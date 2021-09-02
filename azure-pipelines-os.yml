@@ -1,6 +1,12 @@
 pool:
   vmImage: 'windows-latest'
 
+trigger:
+  branches:
+    include:
+    - main
+pr: none
+
 stages:
 - stage: Build
   displayName: 'Build'
