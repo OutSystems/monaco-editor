@@ -7,6 +7,10 @@ trigger:
     - main-os
 pr: none
 
+variables:
+  TagName: 'v$(Build.BuildNumber)'
+
+
 stages:
 - stage: Build
   displayName: 'Build'
@@ -45,16 +49,16 @@ stages:
         deploy:
           steps:
           #Creates a Github release
-          # - task: GitHubRelease@1
-          #   inputs:
-          #     gitHubConnection: 'GitHub Release'
-          #     repositoryName: '$(Build.Repository.Name)'
-          #     action: 'create'
-          #     target: '$(Build.SourceVersion)'
-          #     tagSource: 'userSpecifiedTag'
-          #     tag: '$(TagName)'
-          #     changeLogCompareToRelease: 'lastFullRelease'
-          #     changeLogType: 'commitBased'
+          - task: GitHubRelease@1
+            inputs:
+              gitHubConnection: 'GitHub Release'
+              repositoryName: '$(Build.Repository.Name)'
+              action: 'create'
+              target: '$(Build.SourceVersion)'
+              tagSource: 'userSpecifiedTag'
+              tag: '$(TagName)'
+              changeLogCompareToRelease: 'lastFullRelease'
+              changeLogType: 'commitBased'
           #Publishes the package into the private artifact repository
           - task: Npm@1
             inputs:
