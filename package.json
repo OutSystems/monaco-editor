@@ -1,7 +1,7 @@
 {
-  "name": "monaco-editor",
+  "name": "@outsystems/monaco-editor",
   "private": true,
-  "version": "0.21.3-os3",
+  "version": "0.21.3-os4",
   "description": "A browser based code editor",
   "author": "Microsoft Corporation",
   "license": "MIT",
