@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 trigger:
   branches:
@@ -23,7 +23,7 @@ stages:
               customEndpoint: 'NPM Authentication Token'
           - task: NodeTool@0
             inputs:
-              versionSpec: '12.x'
+              versionSpec: '14.17.3'
           - script: |
               npm install
           - script: |
@@ -40,7 +40,7 @@ stages:
       - deployment: Deploy
         displayName: 'Deploy to npm private repository and creates a git release'
         pool:
-          vmImage: 'windows-latest'
+          vmImage: 'windows-2019'
         environment: Automatic-Release
         strategy:
           runOnce:
