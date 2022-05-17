@@ -1,6 +1,6 @@
 {
-	"name": "monaco-editor",
-	"version": "0.31.0",
+	"name": "@outsystems/monaco-editor",
+	"version": "0.31.0-os",
 	"vscode": "7db1a2b88f7557e0a43fec75b6ba7e50b3e9f77e",
 	"private": true,
 	"description": "A browser based code editor",
@@ -41,7 +41,7 @@
 		"jsdom": "^18.1.0",
 		"jsonc-parser": "^3.0.0",
 		"mocha": "^9.1.3",
-		"monaco-editor-core": "0.31.0",
+		"monaco-editor-core": "0.31.0-os",
 		"playwright": "^1.16.3",
 		"prettier": "^2.4.1",
 		"pretty-quick": "^3.1.1",
