@@ -196,7 +196,7 @@ function buildESM(options) {
 	build({
 		entryPoints: options.entryPoints,
 		bundle: true,
-		target: 'esnext',
+		target: 'es2017',
 		format: 'esm',
 		define: {
 			AMD: 'false'
@@ -230,7 +230,7 @@ function buildOneAMD(type, options) {
 	const opts = {
 		entryPoints: [options.entryPoint],
 		bundle: true,
-		target: 'esnext',
+		target: 'es2017',
 		format: 'iife',
 		define: {
 			AMD: 'true'
