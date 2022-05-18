@@ -102,7 +102,7 @@ export function buildESM(options: { base: string; entryPoints: string[]; externa
 	build({
 		entryPoints: options.entryPoints,
 		bundle: true,
-		target: 'esnext',
+		target: 'es2017',
 		format: 'esm',
 		define: {
 			AMD: 'false'
@@ -139,7 +139,7 @@ function buildOneAMD(
 	const opts: esbuild.BuildOptions = {
 		entryPoints: [options.entryPoint],
 		bundle: true,
-		target: 'esnext',
+		target: 'es2017',
 		format: 'iife',
 		define: {
 			AMD: 'true'
