@@ -81,9 +81,15 @@ export interface ModeConfiguration {
 	readonly foldingRanges?: boolean;
 
 	/**
+	 * Defines diagnostic codes to be ignored.
+	 */
+	 readonly diagnosticCodesToIgnore?: number[];
+
+	/**
 	 * Defines whether the built-in diagnostic provider is enabled.
 	 */
 	readonly diagnostics?: boolean;
+
 
 	/**
 	 * Defines whether the built-in selection range provider is enabled.

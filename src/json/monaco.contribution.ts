@@ -112,7 +112,7 @@ export interface ModeConfiguration {
 	/**
 	 * Defines diagnostic codes to be ignored.
 	 */
-	 diagnosticCodesToIgnore?: number[];
+	readonly diagnosticCodesToIgnore?: number[];
 
 	/**
 	 * Defines whether the built-in selection range provider is enabled.
