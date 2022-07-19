@@ -1,6 +1,6 @@
 {
 	"name": "@outsystems/monaco-editor",
-	"version": "0.31.4-os",
+	"version": "0.31.2-os",
 	"vscode": "8ad5e3bceab16a4d0856c43a374b511dffb1e795",
 	"private": true,
 	"description": "A browser based code editor",
