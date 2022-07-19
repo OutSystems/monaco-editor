@@ -86,11 +86,6 @@ export interface ModeConfiguration {
 	readonly diagnostics?: boolean;
 
 	/**
-	 * Defines diagnostic codes to be ignored.
-	 */
-	readonly diagnosticCodesToIgnore?: number[];
-
-	/**
 	 * Defines whether the built-in selection range provider is enabled.
 	 */
 	readonly selectionRanges?: boolean;

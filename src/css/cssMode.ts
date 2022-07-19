@@ -95,7 +95,7 @@ export function setupMode(defaults: LanguageServiceDefaults): IDisposable {
 		}
 		if (modeConfiguration.diagnostics) {
 			providers.push(
-				new languageFeatures.DiagnosticsAdapter(languageId, worker, defaults.onDidChange, defaults.modeConfiguration?.diagnosticCodesToIgnore)
+				new languageFeatures.DiagnosticsAdapter(languageId, worker, defaults.onDidChange)
 			);
 		}
 		if (modeConfiguration.selectionRanges) {

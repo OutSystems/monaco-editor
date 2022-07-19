@@ -36,7 +36,7 @@ export class DiagnosticsAdapter<T extends ILanguageWorkerWithDiagnostics> {
 		private readonly _languageId: string,
 		protected readonly _worker: WorkerAccessor<T>,
 		configChangeEvent: IEvent<any>,
-		protected readonly _diagnosticCodesToIgnore: number[]
+		protected readonly _diagnosticCodesToIgnore: number[] = []
 	) {
 		const onModelAdd = (model: editor.IModel): void => {
 			let modeId = model.getLanguageId();
@@ -108,7 +108,7 @@ export class DiagnosticsAdapter<T extends ILanguageWorkerWithDiagnostics> {
 			})
 			.then((allDiagnostics) => {
 				const diagnostics = allDiagnostics
-						.filter(diagnostic => (this._diagnosticCodesToIgnore || []).indexOf(diagnostic.code) === -1);
+						.filter(diagnostic => this._diagnosticCodesToIgnore.indexOf(diagnostic.code) === -1);
 
 				const markers = diagnostics.map((d) => toDiagnostics(resource, d));
 				let model = editor.getModel(resource);
