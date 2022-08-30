@@ -28,7 +28,7 @@ class JSONDiagnosticsAdapter extends languageFeatures.DiagnosticsAdapter<JSONWor
 		worker: languageFeatures.WorkerAccessor<JSONWorker>,
 		defaults: LanguageServiceDefaults
 	) {
-		super(languageId, worker, defaults.onDidChange);
+		super(languageId, worker, defaults.onDidChange, defaults.diagnosticsOptions?.diagnosticCodesToIgnore);
 
 		this._disposables.push(
 			editor.onWillDisposeModel((model) => {
