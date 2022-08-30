@@ -59,6 +59,10 @@ export interface DiagnosticsOptions {
 	 * The severity of reported comments. If not set, 'DiagnosticsOptions.allowComments' defines whether comments are ignored or reported as errors.
 	 */
 	readonly comments?: SeverityLevel;
+	/**
+	 * Defines diagnostic codes to be ignored.
+	 */
+	 readonly diagnosticCodesToIgnore?: number[];
 }
 
 export declare type SeverityLevel = 'error' | 'warning' | 'ignore';
@@ -175,7 +179,8 @@ const diagnosticDefault: Required<DiagnosticsOptions> = {
 	schemaRequest: 'warning',
 	schemaValidation: 'warning',
 	comments: 'error',
-	trailingCommas: 'error'
+	trailingCommas: 'error',
+	diagnosticCodesToIgnore: []
 };
 
 const modeConfigurationDefault: Required<ModeConfiguration> = {
