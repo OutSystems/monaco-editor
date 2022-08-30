@@ -108,7 +108,7 @@ export class DiagnosticsAdapter<T extends ILanguageWorkerWithDiagnostics> {
 			})
 			.then((allDiagnostics) => {
 				const diagnostics = allDiagnostics
-						.filter(diagnostic => !this._diagnosticCodesToIgnore.includes(diagnostic.code));
+						.filter(diagnostic => this._diagnosticCodesToIgnore.indexOf(diagnostic.code) === -1);
 
 				const markers = diagnostics.map((d) => toDiagnostics(resource, d));
 				let model = editor.getModel(resource);
