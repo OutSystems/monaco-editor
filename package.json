@@ -1,6 +1,6 @@
 {
 	"name": "@outsystems/monaco-editor",
-	"version": "0.31.1-os2",
+	"version": "0.31.1-os3",
 	"vscode": "8ad5e3bceab16a4d0856c43a374b511dffb1e795",
 	"private": true,
 	"description": "A browser based code editor",
@@ -46,7 +46,7 @@
 		"prettier": "^2.4.1",
 		"pretty-quick": "^3.1.1",
 		"requirejs": "^2.3.6",
-		"terser": "^5.10.0",
+		"terser": "^5.14.2",
 		"typedoc": "^0.22.9",
 		"typescript": "4.4.4",
 		"vscode-css-languageservice": "^5.1.8",
