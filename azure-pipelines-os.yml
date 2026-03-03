@@ -27,10 +27,10 @@ stages:
           - script: |
               npm install
           - script: |
-              npm run release
+              npm run build-monaco-editor
           - task: PublishPipelineArtifact@1
             inputs:
-              targetPath: './release'
+              targetPath: './out/monaco-editor'
               artifact: 'artifacts'
               publishLocation: 'pipeline'
 
@@ -61,6 +61,6 @@ stages:
                 - task: Npm@1
                   inputs:
                     command: 'publish'
-                    workingDir: '$(Pipeline.Workspace)/artifacts/'
+                    workingDir: '$(Pipeline.Workspace)/artifacts'
                     publishRegistry: 'useFeed'
                     publishFeed: 'd8b4d1eb-aeb3-4b5b-9b43-37b4fc985e2f'
