@@ -23,9 +23,9 @@ stages:
               customEndpoint: 'NPM Authentication Token'
           - task: NodeTool@0
             inputs:
-              versionSpec: '14.17.3'
+              versionSpec: '20.14.0'
           - script: |
-              npm install
+              npm ci
           - script: |
               npm run build-monaco-editor
           - task: PublishPipelineArtifact@1
