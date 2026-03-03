@@ -1,7 +1,5 @@
 pool:
-  name: Azure Pipelines
-  demands:
-    - Agent.OS -equals Windows_NT
+  vmImage: 'windows-latest'
 
 trigger:
   branches:
@@ -42,9 +40,7 @@ stages:
       - deployment: Deploy
         displayName: 'Deploy to npm private repository and creates a git release'
         pool:
-          name: Azure Pipelines
-          demands:
-            - Agent.OS -equals Windows_NT
+          vmImage: 'windows-latest'
         environment: Automatic-Release
         strategy:
           runOnce:
