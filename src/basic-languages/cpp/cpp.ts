@@ -197,6 +197,9 @@ export const language = <languages.IMonarchLanguage>{
 		'__m256',
 		'__m256d',
 		'__m256i',
+		'__m512',
+		'__m512d',
+		'__m512i',
 		'__m64',
 		'__multiple_inheritance',
 		'__newslot',
@@ -256,7 +259,6 @@ export const language = <languages.IMonarchLanguage>{
 		'%',
 		'<<',
 		'>>',
-		'>>>',
 		'+=',
 		'-=',
 		'*=',
@@ -266,13 +268,12 @@ export const language = <languages.IMonarchLanguage>{
 		'^=',
 		'%=',
 		'<<=',
-		'>>=',
-		'>>>='
+		'>>='
 	],
 
 	// we include these common regular expressions
 	symbols: /[=><!~?:&|+\-*\/\^%]+/,
-	escapes: /\\(?:[abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
+	escapes: /\\(?:[0abfnrtv\\"']|x[0-9A-Fa-f]{1,4}|u[0-9A-Fa-f]{4}|U[0-9A-Fa-f]{8})/,
 	integersuffix: /([uU](ll|LL|l|L)|(ll|LL|l|L)?[uU]?)/,
 	floatsuffix: /[fFlL]?/,
 	encoding: /u|u8|U|L/,
@@ -309,8 +310,7 @@ export const language = <languages.IMonarchLanguage>{
 			// [[ attributes ]].
 			[/\[\s*\[/, { token: 'annotation', next: '@annotation' }],
 			// delimiters and operators
-			[/[{}()\[\]]/, '@brackets'],
-			[/[<>](?!@symbols)/, '@brackets'],
+			[/[{}()<>\[\]]/, '@brackets'],
 			[
 				/@symbols/,
 				{
@@ -378,21 +378,9 @@ export const language = <languages.IMonarchLanguage>{
 		],
 
 		raw: [
-			[
-				/(.*)(\))(?:([^ ()\\\t"]*))(\")/,
-				{
-					cases: {
-						'$3==$S2': [
-							'string.raw',
-							'string.raw.end',
-							'string.raw.end',
-							{ token: 'string.raw.end', next: '@pop' }
-						],
-						'@default': ['string.raw', 'string.raw', 'string.raw', 'string.raw']
-					}
-				}
-			],
-			[/.*/, 'string.raw']
+			[/[^)]+/, 'string.raw'],
+			[/\)$S2\"/, { token: 'string.raw.end', next: '@pop' }],
+			[/\)/, 'string.raw']
 		],
 
 		annotation: [

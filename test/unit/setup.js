@@ -9,11 +9,20 @@ define('vs/nls', [], {
 		return {
 			localize: function () {
 				return 'NO_LOCALIZATION_FOR_YOU';
+			},
+			localize2: function () {
+				return 'NO_LOCALIZATION_FOR_YOU';
+			},
+			getConfiguredDefaultLocale: function () {
+				return undefined;
 			}
 		};
 	},
 	localize: function () {
 		return 'NO_LOCALIZATION_FOR_YOU';
+	},
+	localize2: function (key, message) {
+		return { value: 'NO_LOCALIZATION_FOR_YOU', original: message };
 	},
 	load: function (name, req, load) {
 		load({});

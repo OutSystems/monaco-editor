@@ -1,4 +1,4 @@
-import type { languages } from '../../fillers/monaco-editor-core';
+import { languages } from '../../fillers/monaco-editor-core';
 
 export const conf: languages.LanguageConfiguration = {
 	comments: {
@@ -25,7 +25,15 @@ export const conf: languages.LanguageConfiguration = {
 	],
 	folding: {
 		offSide: true
-	}
+	},
+	onEnterRules: [
+		{
+			beforeText: /:\s*$/,
+			action: {
+				indentAction: languages.IndentAction.Indent
+			}
+		}
+	]
 };
 
 export const language = <languages.IMonarchLanguage>{
@@ -78,13 +86,13 @@ export const language = <languages.IMonarchLanguage>{
 			[/@numberDate(?![ \t]*\S+)/, 'number.date'],
 
 			// Key:Value pair
-			[/(".*?"|'.*?'|.*?)([ \t]*)(:)( |$)/, ['type', 'white', 'operators', 'white']],
+			[/(".*?"|'.*?'|[^#'"]*?)([ \t]*)(:)( |$)/, ['type', 'white', 'operators', 'white']],
 
 			{ include: '@flowScalars' },
 
 			// String nodes
 			[
-				/[^#]+/,
+				/.+?(?=(\s+#|$))/,
 				{
 					cases: {
 						'@keywords': 'keyword',

@@ -127,6 +127,7 @@ export const language = {
 		'null',
 		'number',
 		'object',
+		'out',
 		'package',
 		'private',
 		'protected',
@@ -136,6 +137,7 @@ export const language = {
 		'require',
 		'global',
 		'return',
+		'satisfies',
 		'set',
 		'static',
 		'string',
@@ -225,7 +227,7 @@ export const language = {
 		common: [
 			// identifiers and keywords
 			[
-				/[a-z_$][\w$]*/,
+				/#?[a-z_$][\w$]*/,
 				{
 					cases: {
 						'@keywords': 'keyword',

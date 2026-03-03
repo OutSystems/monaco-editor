@@ -32,7 +32,7 @@ export const conf: languages.LanguageConfiguration = {
 	onEnterRules: [
 		{
 			beforeText: new RegExp(
-				'^\\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\\s*$'
+				'^\\s*(?:def|class|for|if|elif|else|while|try|with|finally|except|async|match|case).*?:\\s*$'
 			),
 			action: { indentAction: languages.IndentAction.Indent }
 		}
@@ -52,18 +52,21 @@ export const language = <languages.IMonarchLanguage>{
 
 	keywords: [
 		// This section is the result of running
-		// `for k in keyword.kwlist: print('  "' + k + '",')` in a Python REPL,
+		// `import keyword; for k in sorted(keyword.kwlist + keyword.softkwlist): print("  '" + k + "',")`
+		// in a Python REPL,
 		// though note that the output from Python 3 is not a strict superset of the
 		// output from Python 2.
 		'False', // promoted to keyword.kwlist in Python 3
 		'None', // promoted to keyword.kwlist in Python 3
 		'True', // promoted to keyword.kwlist in Python 3
+		'_', // new in Python 3.10
 		'and',
 		'as',
 		'assert',
 		'async', // new in Python 3
 		'await', // new in Python 3
 		'break',
+		'case', // new in Python 3.10
 		'class',
 		'continue',
 		'def',
@@ -81,6 +84,7 @@ export const language = <languages.IMonarchLanguage>{
 		'in',
 		'is',
 		'lambda',
+		'match', // new in Python 3.10
 		'nonlocal', // new in Python 3
 		'not',
 		'or',
@@ -89,6 +93,7 @@ export const language = <languages.IMonarchLanguage>{
 		'raise',
 		'return',
 		'try',
+		'type', // new in Python 3.12
 		'while',
 		'with',
 		'yield',
@@ -245,9 +250,19 @@ export const language = <languages.IMonarchLanguage>{
 		// Recognize strings, including those broken across lines with \ (but not without)
 		strings: [
 			[/'$/, 'string.escape', '@popall'],
+			[/f'{1,3}/, 'string.escape', '@fStringBody'],
 			[/'/, 'string.escape', '@stringBody'],
 			[/"$/, 'string.escape', '@popall'],
+			[/f"{1,3}/, 'string.escape', '@fDblStringBody'],
 			[/"/, 'string.escape', '@dblStringBody']
+		],
+		fStringBody: [
+			[/[^\\'\{\}]+$/, 'string', '@popall'],
+			[/[^\\'\{\}]+/, 'string'],
+			[/\{[^\}':!=]+/, 'identifier', '@fStringDetail'],
+			[/\\./, 'string'],
+			[/'/, 'string.escape', '@popall'],
+			[/\\$/, 'string']
 		],
 		stringBody: [
 			[/[^\\']+$/, 'string', '@popall'],
@@ -256,12 +271,26 @@ export const language = <languages.IMonarchLanguage>{
 			[/'/, 'string.escape', '@popall'],
 			[/\\$/, 'string']
 		],
+		fDblStringBody: [
+			[/[^\\"\{\}]+$/, 'string', '@popall'],
+			[/[^\\"\{\}]+/, 'string'],
+			[/\{[^\}':!=]+/, 'identifier', '@fStringDetail'],
+			[/\\./, 'string'],
+			[/"/, 'string.escape', '@popall'],
+			[/\\$/, 'string']
+		],
 		dblStringBody: [
 			[/[^\\"]+$/, 'string', '@popall'],
 			[/[^\\"]+/, 'string'],
 			[/\\./, 'string'],
 			[/"/, 'string.escape', '@popall'],
 			[/\\$/, 'string']
+		],
+		fStringDetail: [
+			[/[:][^}]+/, 'string'],
+			[/[!][ars]/, 'string'], // only !a, !r, !s are supported by f-strings: https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals
+			[/=/, 'string'],
+			[/\}/, 'identifier', '@pop']
 		]
 	}
 };
