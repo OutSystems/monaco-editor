@@ -1,4 +1,5 @@
 pool:
+  name: Azure Pipelines
   vmImage: 'windows-2019'
 
 trigger:
@@ -40,6 +41,7 @@ stages:
       - deployment: Deploy
         displayName: 'Deploy to npm private repository and creates a git release'
         pool:
+          name: Azure Pipelines
           vmImage: 'windows-2019'
         environment: Automatic-Release
         strategy:
