@@ -82,7 +82,7 @@ export default defineConfig({
 			},
 		}),
 		nodeResolve({
-			dedupe: ['monaco-editor-core', '@vscode/monaco-lsp-client'],
+			dedupe: ['monaco-editor-core'],
 			browser: true,
 		}),
 	],
