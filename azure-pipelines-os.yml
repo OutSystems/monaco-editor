@@ -27,7 +27,7 @@ stages:
               versionFilePath: .nvmrc
           - script: npm ci
           - script: |
-              npm run build-monaco-editor
+              npm run build
           - task: PublishPipelineArtifact@1
             inputs:
               targetPath: './out/monaco-editor'
