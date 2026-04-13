@@ -1,5 +1,5 @@
 pool:
-  vmImage: 'windows-2019'
+  vmImage: 'windows-latest'
 
 trigger:
   branches:
@@ -23,14 +23,14 @@ stages:
               customEndpoint: 'NPM Authentication Token'
           - task: NodeTool@0
             inputs:
-              versionSpec: '14.17.3'
+              versionSource: fromFile
+              versionFilePath: .nvmrc
+          - script: npm ci
           - script: |
-              npm install
-          - script: |
-              npm run release
+              npm run build-monaco-editor
           - task: PublishPipelineArtifact@1
             inputs:
-              targetPath: './release'
+              targetPath: './out/monaco-editor'
               artifact: 'artifacts'
               publishLocation: 'pipeline'
 
@@ -40,7 +40,7 @@ stages:
       - deployment: Deploy
         displayName: 'Deploy to npm private repository and creates a git release'
         pool:
-          vmImage: 'windows-2019'
+          vmImage: 'windows-latest'
         environment: Automatic-Release
         strategy:
           runOnce:

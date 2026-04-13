@@ -1,8 +1,15 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+//@ts-check
+
 const esbuild = require('esbuild');
 const path = require('path');
-const { removeDir } = require('../../build/utils');
+const fs = require('fs');
 
-removeDir(path.join(__dirname, 'dist'));
+removeDir('dist', (entry) => /index.html$/.test(entry));
 
 const workerEntryPoints = [
 	'vs/language/json/json.worker.js',
@@ -42,4 +49,48 @@ function build(opts) {
 			console.error(result.warnings);
 		}
 	});
+}
+
+/**
+ * Remove a directory and all its contents.
+ * @param {string} _dirPath
+ * @param {(filename: string) => boolean} [keep]
+ */
+function removeDir(_dirPath, keep) {
+	if (typeof keep === 'undefined') {
+		keep = () => false;
+	}
+	const dirPath = path.join(__dirname, _dirPath);
+	if (!fs.existsSync(dirPath)) {
+		return;
+	}
+	rmDir(dirPath, _dirPath);
+	console.log(`Deleted ${_dirPath}`);
+
+	/**
+	 * @param {string} dirPath
+	 * @param {string} relativeDirPath
+	 * @returns {boolean}
+	 */
+	function rmDir(dirPath, relativeDirPath) {
+		let keepsFiles = false;
+		const entries = fs.readdirSync(dirPath);
+		for (const entry of entries) {
+			const filePath = path.join(dirPath, entry);
+			const relativeFilePath = path.join(relativeDirPath, entry);
+			if (keep(relativeFilePath)) {
+				keepsFiles = true;
+				continue;
+			}
+			if (fs.statSync(filePath).isFile()) {
+				fs.unlinkSync(filePath);
+			} else {
+				keepsFiles = rmDir(filePath, relativeFilePath) || keepsFiles;
+			}
+		}
+		if (!keepsFiles) {
+			fs.rmdirSync(dirPath);
+		}
+		return keepsFiles;
+	}
 }
