@@ -34,13 +34,13 @@
 		"build-monaco-editor": "ts-node ./build/build-monaco-editor"
 	},
 	"typings": "./esm/vs/editor/editor.api.d.ts",
-	"main": "./min/vs/editor/editor.main.js",
+	"main": "./esm/vs/editor/editor.main.js",
 	"module": "./esm/vs/editor/editor.main.js",
 	"exports": {
 		".": {
 			"types": "./esm/vs/index.d.ts",
 			"import": "./esm/vs/index.js",
-			"require": "./min/vs/index.js"
+			"require": "./esm/vs/index.js"
 		},
 		"./*.js": "./esm/vs/*.js",
 		"./*": "./esm/vs/*.js"
