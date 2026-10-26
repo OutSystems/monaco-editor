@@ -20,7 +20,6 @@ stages:
           - task: npmAuthenticate@0
             inputs:
               workingFile: '.npmrc'
-              customEndpoint: 'NPM Authentication Token'
           - task: NodeTool@0
             inputs:
               versionSource: fromFile
